@@ -20,3 +20,5 @@ a{text-decoration:none}button,input,select{font:inherit}button{cursor:pointer}se
 @media(max-width:900px){.cards,.galeria-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cabecalho{flex-wrap:wrap}.menu-toggle{display:block}.menu{display:none;width:100%;flex-direction:column;gap:0;border-top:1px solid #444;padding-top:10px}.menu.aberto{display:flex}.menu a{display:block;padding:10px 4px}.hero{min-height:70vh}.descricao{font-size:16px}.destaque{font-size:11px;letter-spacing:2px}.cards,.galeria-grid{grid-template-columns:1fr}.galeria-grid img{height:250px}.secao{padding:65px 6%}.modal-conteudo{padding:32px 18px}.whatsapp-flutuante{width:54px;height:54px;right:15px;bottom:15px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.acoes-mensagem{display:flex;flex-wrap:wrap;gap:10px}.acoes-mensagem .botao{flex:1 1 170px;text-align:center}.botao-whatsapp{background:#25d366;color:#102316}.botao-whatsapp:hover{background:#6bec98}.botao-secundario{background:#454545;color:#fff}.botao-secundario:hover{background:#5c5c5c}

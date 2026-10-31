@@ -1,3 +1,9 @@
+// ETAPA 11: Para enviar a uma barbearia específica, preencha abaixo
+// com o número autorizado, apenas dígitos, incluindo país e DDD.
+// Exemplo fictício de formato: "5581999999999".
+// Deixe vazio para o WhatsApp permitir escolher o destinatário.
+const WHATSAPP_BARBEARIA = "";
+
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("menu-principal");
@@ -25,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultado = document.getElementById("resultado");
   const mensagemGerada = document.getElementById("mensagem-gerada");
   const copiar = document.getElementById("copiar-mensagem");
+  const enviarWhatsapp = document.getElementById("enviar-whatsapp");
   const statusCopia = document.getElementById("status-copia");
   let mensagemAtual = "";
 
@@ -38,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function limparResultado() {
     resultado.hidden = true;
     mensagemAtual = "";
+    enviarWhatsapp.removeAttribute("href");
     statusCopia.textContent = "";
   }
   data.min = hojeLocal();
@@ -64,9 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const valor = Number(servico.value).toLocaleString("pt-BR", {style:"currency",currency:"BRL"});
     mensagemAtual = `Olá! Meu nome é ${nomeCliente}.\n\nGostaria de solicitar um agendamento na Barber Studio.\n\n✂ Serviço: ${nomeServico}\n📅 Data desejada: ${dia}/${mes}/${ano}\n🕒 Horário desejado: ${horario.value}\n💰 Valor informado: ${valor}\n\nPoderiam confirmar a disponibilidade?`;
     mensagemGerada.textContent = mensagemAtual;
+    const numero = WHATSAPP_BARBEARIA.replace(/\D/g, "");
+    const caminho = numero ? `https://wa.me/${numero}` : "https://api.whatsapp.com/send";
+    enviarWhatsapp.href = `${caminho}?text=${encodeURIComponent(mensagemAtual)}`;
     resultado.hidden = false;
     statusCopia.textContent = "";
     resultado.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+  enviarWhatsapp.addEventListener("click", evento => {
+    if (!mensagemAtual || !enviarWhatsapp.href || !enviarWhatsapp.hasAttribute("href")) {
+      evento.preventDefault();
+    }
   });
   copiar.addEventListener("click", async () => {
     if (!mensagemAtual) return;
